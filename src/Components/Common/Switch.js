@@ -69,12 +69,21 @@ const Wrapper = styled.div`
   align-items: center;
   width: ${props => `${props.scale * 75}px`};
   color: ${props => props.theme.primary};
+  font-size: 30px;
+`;
+
+const Moon = styled.div`
+  padding-right: 5px;
+`;
+
+const Sun = styled.div`
+  padding-left: 5px;
 `;
 
 const Switch = ({ onChange, checked, scale }) => {
   return (
     <Wrapper scale={scale}>
-      &#9790;
+      <Moon>&#9790;</Moon>
       <Input
         type="checkbox"
         name="toggle"
@@ -84,7 +93,7 @@ const Switch = ({ onChange, checked, scale }) => {
         scale={scale}
       />
       <SwitchLabel htmlFor="toggle" scale={scale} />
-      &#9788;
+      <Sun>&#9788;</Sun>
     </Wrapper>
   );
 };

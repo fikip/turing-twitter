@@ -25,9 +25,9 @@ export const themes = {
   light: {
     name: "light",
     primary: "#000000",
-    secondary: "#E3E3E3",
+    secondary: "#FFFFFF",
     tertiary: "#40ED70",
-    background: "#FFFFFF",
+    background: "#E3E3E3",
     twitter: "#38A1F3"
   }
 };
