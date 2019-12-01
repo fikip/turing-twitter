@@ -1,8 +1,6 @@
-/** Created by Filip Drgoň on 27/11/2019. */
-
-import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+import React from "react";
 
 const SwitchLabel = styled.label`
   display: block;
@@ -44,14 +42,12 @@ const SwitchLabel = styled.label`
     transition: 0.25s ease-in-out;
   }
 `;
-
 const Input = styled.input`
   max-height: 0;
   max-width: 0;
   opacity: 0;
   position: absolute;
 `;
-
 const Wrapper = styled.div`
   ${Input}:checked + ${SwitchLabel}:before {
     width: ${props => `${props.scale * 50}px`};
@@ -71,16 +67,14 @@ const Wrapper = styled.div`
   color: ${props => props.theme.primary};
   font-size: 30px;
 `;
-
 const Moon = styled.div`
   padding-right: 5px;
 `;
-
 const Sun = styled.div`
   padding-left: 5px;
 `;
 
-const Switch = ({ onChange, checked, scale }) => {
+export const Switch = ({ onChange, checked, scale }) => {
   return (
     <Wrapper scale={scale}>
       <Moon>&#9790;</Moon>
@@ -106,5 +100,3 @@ Switch.propTypes = {
 Switch.defaultProps = {
   scale: 1
 };
-
-export default Switch;
