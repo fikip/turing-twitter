@@ -206,15 +206,7 @@ const App = () => {
   const [theme, setTheme] = useState(
     themes[localStorage.getItem("theme") || "dark"]
   );
-  const [channels, setChannels] = useState([
-    {
-      name: "Bitcoin",
-      refreshUrl: `?${queryString.stringify({
-        q: "Bitcoin"
-      })}`,
-      statuses: []
-    }
-  ]);
+  const [channels, setChannels] = useState([]);
   const [subscribeText, setSubscribeText] = useState("");
   useEffect(() => {
     // eslint-disable-next-line array-callback-return
