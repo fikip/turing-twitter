@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./img/turing-twitter.png";
 import styled, { ThemeProvider } from "styled-components";
 import Switch from "./Components/Common/Switch";
 import { themes, GlobalStyle } from "./style/theme";
+import queryString from "query-string";
 
 const AppWrapper = styled.div`
   text-align: center;
@@ -87,6 +88,27 @@ const App = () => {
   const [theme, setTheme] = useState(
     themes[localStorage.getItem("theme") || "dark"]
   );
+  const [refreshUrl, setRefreshUrl] = useState(null);
+  useEffect(() => {
+    const interval = setTimeout(async () => {
+      const response = await fetch(
+        `https://turing-twitter.filipdrgon.now.sh/api/search${refreshUrl ||
+          "?" +
+            queryString.stringify({
+              q: "Bitcoin"
+            })}`,
+        {
+          method: "GET"
+        }
+      );
+      const json = await response.json();
+      const { refresh_url } = json.search_metadata;
+      if (refresh_url) setRefreshUrl(refresh_url);
+      console.log(json);
+    }, 8000);
+    return () => clearTimeout(interval);
+  }, [refreshUrl]);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
