@@ -69,9 +69,11 @@ const Wrapper = styled.div`
 `;
 const Moon = styled.div`
   padding-right: 5px;
+  color: ${props => props.theme.primary};
 `;
 const Sun = styled.div`
   padding-left: 5px;
+  color: ${props => props.theme.primary};
 `;
 
 export const Switch = ({ onChange, checked, scale }) => {

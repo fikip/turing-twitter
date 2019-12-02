@@ -94,6 +94,28 @@ const App = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const wrapperRef = useRef(null);
 
+  const subscribe = () => {
+    if (subscribeText) {
+      const newChannel = {
+        name: subscribeText,
+        refreshUrl: `?${queryString.stringify({
+          q: subscribeText
+        })}`,
+        statuses: []
+      };
+      setChannels([...channels, newChannel]);
+      setSubscribeText("");
+      setTimeout(
+        () =>
+          wrapperRef.current.scrollTo({
+            top: wrapperRef.current.scrollHeight,
+            behavior: "smooth"
+          }),
+        500
+      );
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -107,32 +129,9 @@ const App = () => {
                 value={subscribeText}
                 onChange={e => setSubscribeText(e.target.value)}
                 placeholder={"Bitcoin"}
+                onKeyDown={e => e.key === "Enter" && subscribe()}
               />
-              <SubscribeButton
-                onClick={() => {
-                  if (subscribeText) {
-                    const newChannel = {
-                      name: subscribeText,
-                      refreshUrl: `?${queryString.stringify({
-                        q: subscribeText
-                      })}`,
-                      statuses: []
-                    };
-                    setChannels([...channels, newChannel]);
-                    setSubscribeText("");
-                    setTimeout(
-                      () =>
-                        wrapperRef.current.scrollTo({
-                          top: wrapperRef.current.scrollHeight,
-                          behavior: "smooth"
-                        }),
-                      500
-                    );
-                  }
-                }}
-              >
-                Subscribe
-              </SubscribeButton>
+              <SubscribeButton onClick={subscribe}>Subscribe</SubscribeButton>
             </HeaderInputWrapper>
           </HeaderLeftWrapper>
           <Switch
